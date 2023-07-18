@@ -16,9 +16,9 @@ routes.use('/Color', Colors);
 
 routes.use('/Marca', Marcas)
 
-routes.use('Vehiculo', Vehiculos)
+routes.use('/Vehiculo', Vehiculos)
 
-routes.use('TipoVehiculo', Tipos_Vehiculos)
+routes.use('/TipoVehiculo', Tipos_Vehiculos)
 
 
 

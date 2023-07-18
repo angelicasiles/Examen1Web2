@@ -26,9 +26,6 @@ export class Tipo_Vehiculo{
     @OneToMany(()=>Vehiculo, (VehiculoTi)=>VehiculoTi.TiposVehiculos,{cascade: ['insert', 'update']})
     vehiculos: Vehiculo[];  //Se crea la lista
 
-
-
-
 }
 
 
