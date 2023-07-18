@@ -2,7 +2,7 @@ import { Router } from "express";
 import ColorController from "../controller/ColorController";
 
 
-const routes = Router();
+const routes = Router();//Se crea la variable de rutas
 
 //Para mostrar toda la información
 routes.get("", ColorController.getAll);
@@ -19,4 +19,4 @@ routes.patch("/getById/:id", ColorController.update)
 //Para eliminar datos por medio del ID
 routes.delete("/getById/:id", ColorController.delete)
 
-export default routes;//Para exportar la ruta
+export default routes; //Exportar la ruta para que otros puedan acceder

@@ -9,7 +9,7 @@ import Tipos_Vehiculos from "./Tipos_Vehiculos";
 
 
 
-
+//Se crea las rutas para cada entidad
 const routes = Router();
 
 routes.use('/Color', Colors);

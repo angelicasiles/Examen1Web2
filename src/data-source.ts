@@ -6,6 +6,9 @@ import { Marca } from "./entity/Marca"
 import { Color } from "./entity/Color"
 
 
+/* El código crea una nueva instancia de la clase `DataSource` y la exporta como `AppDataSource`. La
+clase `DataSource` se usa normalmente en TypeORM para conectarse a una base de datos y configurar
+sus ajustes. */
 export const AppDataSource = new DataSource({
     type: "mysql",
     host: "localhost",

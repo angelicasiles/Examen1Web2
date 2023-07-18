@@ -3,9 +3,9 @@ import { Vehiculo } from "./Vehiculo";
 import { IsNotEmpty } from "class-validator";
 
 
-@Entity()
+@Entity() //Se genera las entidades
 
-export class Tipo_Vehiculo{ 
+export class Tipo_Vehiculo{  //Se exporta la clase
 
     @PrimaryGeneratedColumn()
     @IsNotEmpty({message:'El espacio esta vacio, debes de indicar id'})

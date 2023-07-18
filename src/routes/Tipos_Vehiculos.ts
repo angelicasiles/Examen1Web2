@@ -1,7 +1,7 @@
 import { Router } from "express";
 import Tipo_VehiculoController from "../controller/Tipo_VehiculoController";
 
-const routes = Router();
+const routes = Router(); //Se crea la variable de rutas
 
 //Para mostrar toda la información
 routes.get("", Tipo_VehiculoController.getAll);
@@ -18,4 +18,4 @@ routes.patch("/getById/:id", Tipo_VehiculoController.update)
 //Para eliminar datos por medio del ID
 routes.delete("/getById/:id", Tipo_VehiculoController.delete)
 
-export default routes;
+export default routes; //Exportar la ruta para que otros puedan acceder

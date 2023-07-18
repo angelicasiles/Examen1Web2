@@ -10,16 +10,17 @@ class VehiculoController {
 
     static getById = async (req: Request, resp: Response) => {
 
+        //Parte de la controladora para extraer la información por medio de ID
         try {
             const RepoId = AppDataSource.getRepository(Vehiculo);
             let mostrar, placa;
-            placa = req.params["id"];
+            placa = req.params["id"]; //Busca por medio de la placa
             if (!placa) {
                 return resp.status(404).json({ mensaje: 'No se indica el ID' })
             }
 
             try {
-                mostrar = await RepoId.findOneOrFail({ where: { placa }, relations: { Colors: true, TiposVehiculos: true, marcasVehi: true } })
+                mostrar = await RepoId.findOneOrFail({ where: { placa }, relations: { Colors: true, TiposVehiculos: true, marcasVehi: true } }) //Aquí se realiza las relaciones con las demás tablas
             } catch (error) {
                 return resp.status(404).json({ mensaje: "No existen datos." })
             }
@@ -30,6 +31,8 @@ class VehiculoController {
     }
 
     static add = async (req: Request, resp: Response) => {
+
+        //Parte de la controladora agregar nuevo vehiculo
         try {
             // Destructuring
             // De esa manera estamos sacando del body esos datos:
@@ -43,7 +46,7 @@ class VehiculoController {
             const padreVehiRepository = AppDataSource.getRepository(Vehiculo);
 
 
-
+            //Para realizar la busqueda del ID para despues verificar
             const marca= await padreMarcarRepository.findOne({where:{id:id_marca}});
             const color = await padreColorRepository.findOne({where:{id:id_color}});
             const tipoVehiculo = await padreTipoVehiRepository.findOne({where:{id:id_TipoVehiculo}});
@@ -97,7 +100,40 @@ class VehiculoController {
 
     static delete = async (req: Request, resp: Response) => {
 
+        //Parte de la controladora para eliminar
+
+        try {
+            let placa;
+            placa = req.params["id"]; //Busca por medio de la placa
+            if (!placa) {
+                return resp.status(400).json({ mensaje: 'Debe indicar la de placa que desea eliminar' })
+            }
+
+            const ElimiRepo = AppDataSource.getRepository(Vehiculo);
+            // Buscamos la vehiculo por su placa
+            const EliminarVehi = await ElimiRepo.findOne({ where: { placa, estado: true } }); //Se verifica si esta activo para poderlo eliminar por medio de la placa
+
+            // Validamos si la factura existe en la base de datos
+            if (!EliminarVehi) {
+                return resp.status(404).json({ mensaje: 'La marca no existe en la base de datos' });
+            }
+            //Verifica si se elimina correctamente
+            try {
+                /* Este bloque de código es responsable de eliminar una marca de la base de datos. */
+                EliminarVehi.estado = false;
+                await ElimiRepo.save(EliminarVehi);//Se elimina
+                return resp.status(200).json({ mensaje: 'Se elimino correctamente el vehiculo' })
+            } catch (error) {
+                return resp.status(400).json({ mensaje: 'No se pudo eliminar' })
+            }
+
+        } catch (error) {
+            return resp.status(404).json({ mensaje: 'Ocurrio un problema al momento de eliminar' })
+        }
     }
 }
 
-export default VehiculoController;
+
+    
+
+export default VehiculoController; //Exporta la controladora

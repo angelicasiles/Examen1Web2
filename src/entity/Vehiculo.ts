@@ -4,9 +4,11 @@ import { Tipo_Vehiculo } from "./Tipo_Vehiculo";
 import { Color } from "./Color";
 import { IsNotEmpty } from "class-validator";
 
-//Se realizo las entidades y también decoradores para validar los datos de entrada
-@Entity()
-export class Vehiculo{
+
+
+@Entity() //Se genera las entidades
+
+export class Vehiculo{ //Se exporta la clase
 
     @PrimaryGeneratedColumn()
     @IsNotEmpty({message:'El espacio esta vacio, debes de indicar id'})
